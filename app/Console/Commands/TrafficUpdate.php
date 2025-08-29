@@ -21,7 +21,7 @@ class TrafficUpdate extends Command
      *
      * @var string
      */
-    protected $description = '流量更新任务';
+    protected $description = 'Traffic update task';
 
     /**
      * Create a new command instance.
@@ -73,7 +73,7 @@ class TrafficUpdate extends Command
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            \Log::error('流量更新失败: ' . $e->getMessage());
+            \Log::error('Traffic update failed: ' . $e->getMessage());
             return;
         }
     }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 自己写别抄，抄NMB抄
+ * Write your own code, don't copy
  */
 namespace App\Payments;
 
@@ -18,7 +18,7 @@ class StripeWepay {
     {
         return [
             'currency' => [
-                'label' => '货币单位',
+                'label' => 'Currency Unit',
                 'description' => '',
                 'type' => 'input',
             ],
@@ -28,7 +28,7 @@ class StripeWepay {
                 'type' => 'input',
             ],
             'stripe_webhook_key' => [
-                'label' => 'WebHook密钥签名',
+                'label' => 'WebHook Secret Signature',
                 'description' => '',
                 'type' => 'input',
             ]

@@ -260,11 +260,11 @@ class ClashNyanpasu
         $array['udp'] = true;
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
             $array['network'] = $server['network'];
-            // grpc配置
+            // grpc configuration
             if($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
                 $array['grpc-opts']['grpc-service-name'] = $server['network_settings']['serviceName'];
             }
-            // ws配置
+            // ws configuration
             if($server['network'] === "ws") {
                 if(isset($server['network_settings']['path'])) {
                     $array['ws-opts']['path'] = $server['network_settings']['path'];
@@ -363,7 +363,7 @@ class ClashNyanpasu
             if (isset($server['obfs']) && isset($server['obfs_password'])){
                 $array['obfs'] = $server['obfs_password'];
             }
-            //Todo:完善客户端上下行
+            //Todo: Improve client upload/download
             $array['up'] = $server['down_mbps'];
             $array['down'] = $server['up_mbps'];
             $array['protocol'] = 'udp';

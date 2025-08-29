@@ -66,16 +66,16 @@ class InviteController extends Controller
             $uncheck_commission_balance = $uncheck_commission_balance * (config('v2board.commission_distribution_l1') / 100);
         }
         $stat = [
-            //已注册用户数
+            // Number of registered users
             (int)User::where('invite_user_id', $request->user['id'])->count(),
-            //有效的佣金
+            // Valid commission
             (int)CommissionLog::where('invite_user_id', $request->user['id'])
                 ->sum('get_amount'),
-            //确认中的佣金
+            // Pending commission
             $uncheck_commission_balance,
-            //佣金比例
+            // Commission rate
             (int)$commission_rate,
-            //可用佣金
+            // Available commission
             (int)$user->commission_balance
         ];
         return response([

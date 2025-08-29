@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 自己写别抄，抄NMB抄
+ * Write your own code, don't copy others
  */
 namespace App\Payments;
 
@@ -19,7 +19,7 @@ class MGate {
     {
         return [
             'mgate_url' => [
-                'label' => 'API地址',
+                'label' => 'API URL',
                 'description' => '',
                 'type' => 'input',
             ],
@@ -34,8 +34,8 @@ class MGate {
                 'type' => 'input',
             ],
             'mgate_source_currency' => [
-                'label' => '源货币',
-                'description' => '默认CNY',
+                'label' => 'Source Currency',
+                'description' => 'Default CNY',
                 'type' => 'input'
             ]
         ];
@@ -62,7 +62,7 @@ class MGate {
         $curl->post($this->config['mgate_url'] . '/v1/gateway/fetch', http_build_query($params));
         $result = $curl->response;
         if (!$result) {
-            abort(500, '网络异常');
+            abort(500, 'Network error');
         }
         if ($curl->error) {
             if (isset($result->errors)) {
@@ -72,11 +72,11 @@ class MGate {
             if (isset($result->message)) {
                 abort(500, $result->message);
             }
-            abort(500, '未知错误');
+            abort(500, 'Unknown error');
         }
         $curl->close();
         if (!isset($result->data->trade_no)) {
-            abort(500, '接口请求失败');
+            abort(500, 'API request failed');
         }
         return [
             'type' => 1, // 0:qrcode 1:url

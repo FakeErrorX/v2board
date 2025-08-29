@@ -1,27 +1,21 @@
 window.settings = {
-  // 站点标题
+  // Site title
   title: 'V2Board',
-  // 站点描述
+  // Site description
   description: 'V2Board is best',
   // API
   host: '',
-  // 主题
+  // Theme
   theme: {
     sidebar: 'light',
     header: 'dark',
     color: 'default'
   },
-  // 背景
+  // Background
   background_url: '',
-  // crisp
+  // Crisp
   crisp_id: '',
   i18n: [
-    'zh-CN',
-    'en-US',
-    'ja-JP',
-    'vi-VN',
-    'ko-KR',
-    'zh-TW',
-    'fa-IR'
+    'en-US'
   ]
 }

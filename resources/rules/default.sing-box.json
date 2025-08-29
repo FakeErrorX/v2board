@@ -65,15 +65,15 @@
             }
         },
         {
-            "tag": "节点选择",
+            "tag": "Node Selection",
             "type": "selector",
             "interrupt_exist_connections": true,
             "outbounds": [
-                "自动选择"
+                "Auto Select"
             ]
         },
         {
-            "tag": "自动选择",
+            "tag": "Auto Select",
             "type": "urltest",
             "url": "https://www.gstatic.com/generate_204",
             "interval": "10m",
@@ -106,14 +106,14 @@
                 "outbound": "DIRECT"
             },
             {
-                "clash_mode": "关闭代理",
+                "clash_mode": "Direct Proxy Off",
                 "action": "route",
                 "outbound": "DIRECT"
             },
             {
-                "clash_mode": "全局代理",
+                "clash_mode": "Global Proxy",
                 "action": "route",
-                "outbound": "节点选择"
+                "outbound": "Node Selection"
             },
             {
                 "rule_set": [
@@ -124,7 +124,7 @@
             }
         ],
         "auto_detect_interface": true,
-        "final": "节点选择",
+        "final": "Node Selection",
         "default_domain_resolver": {
             "server": "remote"
         },
@@ -134,28 +134,28 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-geolocation-!cn.srs",
-                "download_detour": "节点选择"
+                "download_detour": "Node Selection"
             },
             {
                 "tag": "geoip-cn",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/Loyalsoldier/geoip/release/srs/cn.srs",
-                "download_detour": "节点选择"
+                "download_detour": "Node Selection"
             },
             {
                 "tag": "geosite-cn",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-cn.srs",
-                "download_detour": "节点选择"
+                "download_detour": "Node Selection"
             },
             {
                 "tag": "category-ads-all",
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/SagerNet/sing-geosite/rule-set/geosite-category-ads-all.srs",
-                "download_detour": "节点选择"
+                "download_detour": "Node Selection"
             }
         ]
     },
@@ -164,7 +164,7 @@
             "enabled": true
         },
         "clash_api": {
-            "default_mode": "海外代理",
+            "default_mode": "Overseas Proxy",
             "external_controller": "127.0.0.1:9090",
             "secret": ""
         }

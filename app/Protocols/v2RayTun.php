@@ -20,44 +20,45 @@ class v2RayTun
 
     public function handle()
     {
-        // 节点组内容，和 V2rayNG 一致
+        // Node group content, consistent with V2rayNG
         $uri = '';
         foreach ($this->servers as $server) {
             $uri .= Helper::buildUri($this->user['uuid'], $server);
         }
         $body = base64_encode($uri);
 
-        // 构建 v2raytun 标头
+        // Build v2raytun headers
         $appName = config('v2board.app_name', 'V2Board');
         $headers = [
-            // profile-title 支持 base64 和原文
-            'profile-title' => $this->getProfileTitle($appName),
+            // profile-title supports base64 and plain text
+                        // Base64 title
+            'profile-title' => base64_encode($appName),
             // subscription-userinfo
             'subscription-userinfo' => $this->getUserInfoHeader($this->user),
             // profile-update-interval
             'profile-update-interval' => $this->options['profile_update_interval'] ?? '24',
         ];
 
-        // routing 路由（base64）
+        // routing routes (base64)
         if (!empty($this->options['routing'])) {
             $headers['routing'] = $this->options['routing'];
         }
-        // announce 公告
+        // announce announcement
         if (!empty($this->options['announce'])) {
             $headers['announce'] = $this->getAnnounceHeader($this->options['announce']);
         }
-        // announce-url 公告链接
+        // announce-url announcement link
         if (!empty($this->options['announce_url'])) {
             $headers['announce-url'] = $this->options['announce_url'];
         }
-        // update-always 每次登录强制更新订阅
+        // update-always force update subscription on each login
         if (!empty($this->options['update_always'])) {
             $headers['update-always'] = isset($this->options['update_always']) ? ($this->options['update_always'] ? 'true' : 'false') : 'true';
         }
         // Content-Disposition
         $headers['Content-Disposition'] = 'attachment; filename="' . $appName . '"';
 
-        // 返回响应
+        // Return response
         $response = response($body, 200);
         foreach ($headers as $k => $v) {
             $response->header($k, $v);
@@ -65,7 +66,7 @@ class v2RayTun
         return $response;
     }
 
-    // profile-title 支持 base64 和原文
+    // profile-title supports base64 and plain text
     protected function getProfileTitle($appName)
     {
         if (!empty($this->options['profile_title_base64'])) {
@@ -85,7 +86,7 @@ class v2RayTun
         return implode('; ', $parts);
     }
 
-    // announce 支持 base64 和原文
+    // announce supports base64 and plain text
     protected function getAnnounceHeader($announce)
     {
         if (isset($this->options['announce_base64']) && $this->options['announce_base64']) {

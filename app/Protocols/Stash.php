@@ -25,7 +25,7 @@ class Stash
         header("subscription-userinfo: upload={$user['u']}; download={$user['d']}; total={$user['transfer_enable']}; expire={$user['expired_at']}");
         header('profile-update-interval: 24');
         header("content-disposition: filename*=UTF-8''".rawurlencode($appName));
-        // 暂时使用clash配置文件，后续根据Stash更新情况更新
+        // Temporarily using clash configuration file, will update according to Stash updates
         $defaultConfig = base_path() . '/resources/rules/default.stash.yaml';
         $customConfig = base_path() . '/resources/rules/custom.stash.yaml';
         if (\File::exists($customConfig)) {
@@ -261,11 +261,11 @@ class Stash
         $array['udp'] = true;
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
             $array['network'] = $server['network'];
-            // grpc配置
+            // grpc configuration
             if($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
                 $array['grpc-opts']['grpc-service-name'] = $server['network_settings']['serviceName'];
             }
-            // ws配置
+            // ws configuration
             if($server['network'] === "ws") {
                 if(isset($server['network_settings']['path'])) {
                     $array['ws-opts']['path'] = $server['network_settings']['path'];
@@ -341,7 +341,7 @@ class Stash
             if (isset($server['obfs']) && isset($server['obfs_password'])){
                 $array['obfs'] = $server['obfs_password'];
             }
-            //Todo:完善客户端上下行
+            //Todo: Improve client upload/download
             $array['up'] = $server['down_mbps'];
             $array['down'] = $server['up_mbps'];
             $array['protocol'] = 'udp';

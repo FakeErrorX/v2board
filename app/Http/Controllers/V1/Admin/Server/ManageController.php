@@ -46,7 +46,7 @@ class ManageController extends Controller
             foreach($v as $id => $sort) {
                 if (!$model::find($id)->update(['sort' => $sort])) {
                     DB::rollBack();
-                    abort(500, '保存失败');
+                    abort(500, 'Save failed');
                 }
             }
         }

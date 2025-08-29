@@ -85,7 +85,7 @@ class Singbox
     protected function addProxies($proxies)
     {
         foreach ($this->config['outbounds'] as &$outbound) {
-            if (($outbound['type'] === 'selector' && $outbound['tag'] === '节点选择') || ($outbound['type'] === 'urltest' && $outbound['tag'] === '自动选择') || ($outbound['type'] === 'selector' && strpos($outbound['tag'], '#') === 0 )) {
+            if (($outbound['type'] === 'selector' && $outbound['tag'] === 'Node Selection') || ($outbound['type'] === 'urltest' && $outbound['tag'] === 'Auto Select') || ($outbound['type'] === 'selector' && strpos($outbound['tag'], '#') === 0 )) {
                 array_push($outbound['outbounds'], ...array_column($proxies, 'tag'));
             }
         }
@@ -262,11 +262,11 @@ class Singbox
 
         if(isset($server['network']) && in_array($server['network'], ["grpc", "ws"])){
             $array['transport']['type'] = $server['network'];
-            // grpc配置
+            // grpc configuration
             if($server['network'] === "grpc" && isset($server['network_settings']['serviceName'])) {
                 $array['transport']['service_name'] = $server['network_settings']['serviceName'];
             }
-            // ws配置
+            // ws configuration
             if($server['network'] === "ws") {
                 if(isset($server['network_settings']['path'])) {
                     $array['transport']['path'] = $server['network_settings']['path'];
@@ -338,11 +338,11 @@ class Singbox
         $parts = array_map('trim', explode(',', $server['port']));
         $portConfig = [];
         
-        // 检查是否为单端口
+        // Check if it's a single port
         if (count($parts) === 1 && !str_contains($parts[0], '-')) {
             $port = (int)$parts[0];
         } else {
-            // 处理多端口情况 舍弃单独的端口 只保留范围端口
+            // Handle multi-port situation: discard individual ports, keep only port ranges
             foreach ($parts as $part) {
                 if (str_contains($part, '-')) {
                     $portConfig[] = str_replace('-', ':', $part);
@@ -361,7 +361,7 @@ class Singbox
             ]
         ];
 
-        // 设置端口配置
+        // Set port configuration
         if (isset($port)) {
             $array['server_port'] = $port;
         } else {

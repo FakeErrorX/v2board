@@ -33,7 +33,7 @@ class Loon
                 $uri .= self::buildVless($user['uuid'], $item);
             }elseif ($item['type'] === 'trojan') {
                 $uri .= self::buildTrojan($user['uuid'], $item);
-            }elseif ($item['type'] === 'hysteria' && $item['version'] === 2) { //loon只支持hysteria2
+            }elseif ($item['type'] === 'hysteria' && $item['version'] === 2) { //loon only supports hysteria2
                 $uri .= self::buildHysteria($user['uuid'], $item);
             }
         }

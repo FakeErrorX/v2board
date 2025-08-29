@@ -29,19 +29,19 @@ class GiftcardGenerate extends FormRequest
     public function messages()
     {
         return [
-            'generate_count.integer' => '生成数量必须为数字',
-            'generate_count.max' => '生成数量最大为500个',
-            'name.required' => '名称不能为空',
-            'type.required' => '类型不能为空',
-            'type.in' => '类型格式有误',
-            'value.required' => '数值不能为空',
-            'value.integer' => '数值格式有误',
-            'plan_id.required' => '订阅不能为空',
-            'started_at.required' => '开始时间不能为空',
-            'started_at.integer' => '开始时间格式有误',
-            'ended_at.required' => '结束时间不能为空',
-            'ended_at.integer' => '结束时间格式有误',
-            'limit_use.integer' => '最大使用次数格式有误'
+            'generate_count.integer' => 'Generation count must be numeric',
+            'generate_count.max' => 'Maximum generation count is 500',
+            'name.required' => 'Name cannot be empty',
+            'type.required' => 'Type cannot be empty',
+            'type.in' => 'Type format is incorrect',
+            'value.required' => 'Value cannot be empty',
+            'value.integer' => 'Value format is incorrect',
+            'plan_id.required' => 'Subscription cannot be empty',
+            'started_at.required' => 'Start time cannot be empty',
+            'started_at.integer' => 'Start time format is incorrect',
+            'ended_at.required' => 'End time cannot be empty',
+            'ended_at.integer' => 'End time format is incorrect',
+            'limit_use.integer' => 'Maximum usage count format is incorrect'
         ];
     }
 }

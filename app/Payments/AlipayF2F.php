@@ -1,7 +1,7 @@
 <?php
 
 /**
- * 自己写别抄，抄NMB抄
+ * Write your own code, don't copy others
  */
 namespace App\Payments;
 
@@ -15,23 +15,23 @@ class AlipayF2F {
     {
         return [
             'app_id' => [
-                'label' => '支付宝APPID',
+                'label' => 'Alipay APPID',
                 'description' => '',
                 'type' => 'input',
             ],
             'private_key' => [
-                'label' => '支付宝私钥',
+                'label' => 'Alipay Private Key',
                 'description' => '',
                 'type' => 'input',
             ],
             'public_key' => [
-                'label' => '支付宝公钥',
+                'label' => 'Alipay Public Key',
                 'description' => '',
                 'type' => 'input',
             ],
             'product_name' => [
-                'label' => '自定义商品名称',
-                'description' => '将会体现在支付宝账单中',
+                'label' => 'Custom Product Name',
+                'description' => 'Will be displayed in Alipay bill',
                 'type' => 'input'
             ]
         ];
@@ -43,11 +43,11 @@ class AlipayF2F {
             $gateway = new \Library\AlipayF2F();
             $gateway->setMethod('alipay.trade.precreate');
             $gateway->setAppId($this->config['app_id']);
-            $gateway->setPrivateKey($this->config['private_key']); // 可以是路径，也可以是密钥内容
-            $gateway->setAlipayPublicKey($this->config['public_key']); // 可以是路径，也可以是密钥内容
+            $gateway->setPrivateKey($this->config['private_key']); // Can be path or key content
+            $gateway->setAlipayPublicKey($this->config['public_key']); // Can be path or key content
             $gateway->setNotifyUrl($order['notify_url']);
             $gateway->setBizContent([
-                'subject' => $this->config['product_name'] ?? (config('v2board.app_name', 'V2Board') . ' - 订阅'),
+                'subject' => $this->config['product_name'] ?? (config('v2board.app_name', 'V2Board') . ' - Subscription'),
                 'out_trade_no' => $order['trade_no'],
                 'total_amount' => $order['total_amount'] / 100
             ]);
@@ -66,8 +66,8 @@ class AlipayF2F {
         if ($params['trade_status'] !== 'TRADE_SUCCESS') return false;
         $gateway = new \Library\AlipayF2F();
         $gateway->setAppId($this->config['app_id']);
-        $gateway->setPrivateKey($this->config['private_key']); // 可以是路径，也可以是密钥内容
-        $gateway->setAlipayPublicKey($this->config['public_key']); // 可以是路径，也可以是密钥内容
+        $gateway->setPrivateKey($this->config['private_key']); // Can be path or key content
+        $gateway->setAlipayPublicKey($this->config['public_key']); // Can be path or key content
         try {
             if ($gateway->verify($params)) {
                 /**

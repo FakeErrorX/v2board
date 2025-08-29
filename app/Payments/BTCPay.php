@@ -12,7 +12,7 @@ class BTCPay {
     {
         return [
             'btcpay_url' => [
-                'label' => 'API接口所在网址(包含最后的斜杠)',
+                'label' => 'API Interface URL (including final slash)',
                 'description' => '',
                 'type' => 'input',
             ],
@@ -23,7 +23,7 @@ class BTCPay {
             ],
             'btcpay_api_key' => [
                 'label' => 'API KEY',
-                'description' => '个人设置中的API KEY(非商店设置中的)',
+                'description' => 'API KEY from personal settings (not from store settings)',
                 'type' => 'input',
             ],
             'btcpay_webhook_key' => [

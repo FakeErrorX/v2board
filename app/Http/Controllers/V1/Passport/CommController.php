@@ -46,7 +46,7 @@ class CommController extends Controller
         $email = $request->input('email');
         $isforget = $request->input('isforget');
         $email_exists = User::where('email', $email)->exists();
-        //检查是否在白名单内
+        //Check if it is in the whitelist
         if ((int)config('v2board.email_whitelist_enable', 0)) {
             if (!Helper::emailSuffixVerify(
                 $request->input('email'),
@@ -55,7 +55,7 @@ class CommController extends Controller
                 abort(500, __('Email suffix is not in the Whitelist'));
             }
         }
-        // 检查是否是gmail别名邮箱
+        // Check if it is a Gmail alias email
         if ((int)config('v2board.email_gmail_limit_enable', 0)) {
             $prefix = explode('@', $request->input('email'))[0];
             if (strpos($prefix, '.') !== false || strpos($prefix, '+') !== false) {

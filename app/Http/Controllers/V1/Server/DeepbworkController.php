@@ -30,7 +30,7 @@ class DeepbworkController extends Controller
         }
     }
 
-    // 后端获取用户
+    // Backend get user
     public function user(Request $request)
     {
         ini_set('memory_limit', -1);
@@ -63,7 +63,7 @@ class DeepbworkController extends Controller
         ])->header('ETag', "\"{$eTag}\"");
     }
 
-    // 后端提交数据
+    // Backend submit data
     public function submit(Request $request)
     {
 //         Log::info('serverSubmitData:' . $request->input('node_id') . ':' . request()->getContent() ?: json_encode($_POST));
@@ -92,13 +92,13 @@ class DeepbworkController extends Controller
         ]);
     }
 
-    // 后端获取配置
+    // Backend get configuration
     public function config(Request $request)
     {
         $nodeId = $request->input('node_id');
         $localPort = $request->input('local_port');
         if (empty($nodeId) || empty($localPort)) {
-            abort(500, '参数错误');
+            abort(500, 'Parameter error');
         }
         try {
             $json = $this->getV2RayConfig($nodeId, $localPort);
@@ -113,7 +113,7 @@ class DeepbworkController extends Controller
     {
         $server = ServerVmess::find($nodeId);
         if (!$server) {
-            abort(500, '节点不存在');
+            abort(500, 'Node does not exist');
         }
         $json = json_decode(self::V2RAY_CONFIG);
         $json->log->loglevel = (int)config('v2board.server_log_enable') ? 'debug' : 'none';

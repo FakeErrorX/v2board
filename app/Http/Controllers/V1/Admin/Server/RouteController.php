@@ -30,10 +30,10 @@ class RouteController extends Controller
             'action' => 'required|in:block,dns',
             'action_value' => 'nullable'
         ], [
-            'remarks.required' => '备注不能为空',
-            'match.required' => '匹配值不能为空',
-            'action.required' => '动作类型不能为空',
-            'action.in' => '动作类型参数有误'
+            'remarks.required' => 'Remarks cannot be empty',
+            'match.required' => 'Match value cannot be empty',
+            'action.required' => 'Action type cannot be empty',
+            'action.in' => 'Action type parameter is incorrect'
         ]);
         $params['match'] = array_filter($params['match']);
         // TODO: remove on 1.8.0
@@ -47,10 +47,10 @@ class RouteController extends Controller
                     'data' => true
                 ];
             } catch (\Exception $e) {
-                abort(500, '保存失败');
+                abort(500, 'Save failed');
             }
         }
-        if (!ServerRoute::create($params)) abort(500, '创建失败');
+        if (!ServerRoute::create($params)) abort(500, 'Create failed');
         return [
             'data' => true
         ];
@@ -59,8 +59,8 @@ class RouteController extends Controller
     public function drop(Request $request)
     {
         $route = ServerRoute::find($request->input('id'));
-        if (!$route) abort(500, '路由不存在');
-        if (!$route->delete()) abort(500, '删除失败');
+        if (!$route) abort(500, 'Route does not exist');
+        if (!$route->delete()) abort(500, 'Delete failed');
         return [
             'data' => true
         ];

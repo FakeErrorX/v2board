@@ -27,7 +27,7 @@ class ShadowsocksTidalabController extends Controller
         }
     }
 
-    // 后端获取用户
+    // Backend get user
     public function user(Request $request)
     {
         ini_set('memory_limit', -1);
@@ -57,7 +57,7 @@ class ShadowsocksTidalabController extends Controller
         ])->header('ETag', "\"{$eTag}\"");
     }
 
-    // 后端提交数据
+    // Backend submit data
     public function submit(Request $request)
     {
 //         Log::info('serverSubmitData:' . $request->input('node_id') . ':' . request()->getContent() ?: json_encode($_POST));

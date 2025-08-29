@@ -27,7 +27,7 @@ class CheckRenewal extends Command
      *
      * @var string
      */
-    protected $description = '自动续费';
+    protected $description = 'Auto renewal';
 
     /**
      * Create a new command instance.
@@ -93,19 +93,19 @@ class CheckRenewal extends Command
                     $user->expired_at = $this->getTime($latestPeriod, $user->expired_at);
                     if (!$user->save()) {
                         DB::rollback();
-                        throw new Exception('自动续费失败');
+                        throw new Exception('Auto renewal failed');
                     }
                     $order->status = 3;
                     if (!$order->save()) {
                         DB::rollback();
-                        throw new Exception('自动续费失败');
+                        throw new Exception('Auto renewal failed');
                     }
                     DB::commit();
                     //$mailService->remindAutorenewal($user);
                 } catch (\Exception $e) {
                     $user->auto_renewal = 0;
                     if(!$user->save()){
-                        info('用户自动续费失败,调整设置失败', [$e->getMessage() , $user]);
+                        info('User auto renewal failed, adjustment setting failed', [$e->getMessage() , $user]);
                     };
                 }
             }

@@ -17,10 +17,10 @@ class User
     public function handle($request, Closure $next)
     {
         $authorization = $request->input('auth_data') ?? $request->header('authorization');
-        if (!$authorization) abort(403, '未登录或登陆已过期');
+        if (!$authorization) abort(403, 'Not logged in or login has expired');
 
         $user = AuthService::decryptAuthData($authorization);
-        if (!$user) abort(403, '未登录或登陆已过期');
+        if (!$user) abort(403, 'Not logged in or login has expired');
         $request->merge([
             'user' => $user
         ]);
