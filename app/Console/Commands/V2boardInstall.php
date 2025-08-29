@@ -82,7 +82,9 @@ class V2boardInstall extends Command
             $this->info('Importing database, please wait...');
             foreach ($sql as $item) {
                 try {
-                    DB::select(DB::raw($item));
+                    if (trim($item)) {
+                        DB::statement($item);
+                    }
                 } catch (\Exception $e) {
                 }
             }
