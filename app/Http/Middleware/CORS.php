@@ -8,19 +8,24 @@ class CORS
 {
     public function handle($request, Closure $next)
     {
-        $origin = $request->header('origin');
-        if (empty($origin)) {
-            $referer = $request->header('referer');
-            if (!empty($referer) && preg_match("/^((https|http):\/\/)?([^\/]+)/i", $referer, $matches)) {
-                $origin = $matches[0];
-            }
+        // Handle preflight OPTIONS requests
+        if ($request->getMethod() === "OPTIONS") {
+            return response('', 200)
+                ->header('Access-Control-Allow-Origin', '*')
+                ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH')
+                ->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization, X-Request-With, X-Requested-With, Cache-Control, X-HTTP-Method-Override')
+                ->header('Access-Control-Allow-Credentials', 'true')
+                ->header('Access-Control-Max-Age', '86400');
         }
+
         $response = $next($request);
-        $response->header('Access-Control-Allow-Origin', trim($origin, '/'));
-        $response->header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS,HEAD');
-        $response->header('Access-Control-Allow-Headers', 'Origin,Content-Type,Accept,Authorization,X-Request-With');
+        
+        // Add CORS headers to all responses
+        $response->header('Access-Control-Allow-Origin', '*');
+        $response->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
+        $response->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization, X-Request-With, X-Requested-With, Cache-Control, X-HTTP-Method-Override');
         $response->header('Access-Control-Allow-Credentials', 'true');
-        $response->header('Access-Control-Max-Age', 10080);
+        $response->header('Access-Control-Max-Age', '86400');
 
         return $response;
     }
